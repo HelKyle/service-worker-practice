@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Service Worker Demo</title>
+    </head>
+    <body>
+        <ul id='messageList'>
+        </ul>
+        <input type="text" name="message" value="" id='textInput'>
+        <button id='sendBtn'>发送</button>
+        <a href="." target='_blank'>点击这里打开多一个页面</a>
+        <script>
+            (function() {
+                if ('serviceWorker' in navigator) {
+                    var messageList = document.getElementById('messageList');
+                    var textInput = document.getElementById('textInput');
+                    var sendBtn = document.getElementById('sendBtn');
+
+                  navigator.serviceWorker.register('service-worker.js');
+
+                    navigator.serviceWorker.addEventListener('message', function (event) {
+                        messageList.innerHTML = messageList.innerHTML + '<li>' + event.data.message + '</li>';
+                    });
+
+                    sendBtn.addEventListener('click', function() {
+                        if (textInput.value) {
+                            navigator.serviceWorker.controller.postMessage(textInput.value);
+                            textInput.value = '';
+                        }
+                    })
+                }
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Service Worker</title>
+    </head>
+    <body>
+        <img src="images/1.jpg" alt="">
+        <img src="images/2.jpg" alt="">
+        <img src="images/3.jpg" alt="">
+        <img src="images/4.jpg" alt="">
+        <img src="images/5.jpg" alt="">
+        <img src="images/6.jpg" alt="">
+        <img src="images/7.jpg" alt="">
+
+        <script type="text/javascript">
+            (function() {
+                if ('serviceWorker' in navigator) {
+                    console.log('service worker check in ');
+                    navigator.serviceWorker.register('service-worker.js', {
+                        // scope: '/'
+                    });
+                }
+            })();
+        </script>
+    </body>
+</html>
